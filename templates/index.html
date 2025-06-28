@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Volume Estimation</title>
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='images/Traffic.jpg') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: black;
+      font-family: sans-serif;
+    }
+    .login {
+      background-color: rgba(255, 255, 255, 0.8);
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: inline-block;
+      width: 120px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    input[type="number"],
+    select {
+      width: calc(100% - 130px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    img {
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="login">
+  <center><h1>Traffic Volume Estimation</h1></center>
+  <form action="{{ url_for('predict')}}" method="post">
+    <h2>Please enter the following details</h2>
+
+    <label for="holiday">Holiday:</label>
+    <select id="holiday" name="holiday">
+      <option value=7>None</option>
+      <option value=1>Columbus Day</option>
+      <option value=10>Veterans Day</option>
+      <option value=9>Thanksgiving Day</option>
+      <option value=0>Christmas Day</option>
+      <option value=6>New Years Day</option>
+      <option value=11>Washington's Birthday</option>
+      <option value=5>Memorial Day</option>
+      <option value=2>Independence Day</option>
+      <option value=8>State Fair</option>
+      <option value=3>Labor Day</option>
+      <option value=4>Martin Luther King Jr Day</option>
+    </select><br>
+
+    <label>Temp:</label>
+    <input type="number" name="temp" placeholder="temp" required="required" /><br>
+
+    <label>Rain (0 or 1):</label>
+    <input type="number" min="0" max="1" name="rain" placeholder="rain" required="required" /><br>
+
+    <label>Snow (0 or 1):</label>
+    <input type="number" min="0" max="1" name="snow" placeholder="snow" required="required" /><br>
+
+    <label for="weather">Weather:</label>
+    <select id="weather" name="weather">
+      <option value=1>Clouds</option>
+      <option value=0>Clear</option>
+      <option value=6>Rain</option>
+      <option value=2>Drizzle</option>
+      <option value=5>Mist</option>
+      <option value=4>Haze</option>
+      <option value=3>Fog</option>
+      <option value=10>Thunderstorm</option>
+      <option value=8>Snow</option>
+      <option value=9>Squall</option>
+      <option value=7>Smoke</option>
+    </select><br>
+
+    <label>Year:</label>
+    <input type="number" min="2012" max="2022" name="year" placeholder="year" required="required" /><br>
+
+    <label>Month:</label>
+    <input type="number" min="1" max="12" name="month" placeholder="month" required="required" /><br>
+
+    <label>Day:</label>
+    <input type="number" min="1" max="31" name="day" placeholder="day" required="required" /><br>
+
+    <label>Hours (0-24):</label>
+    <input type="number" min="0" max="24" name="hours" placeholder="hours" required="required" /><br>
+
+    <label>Minutes (0-59):</label>
+    <input type="number" min="0" max="59" name="minutes" placeholder="minutes" required="required" /><br>
+
+    <label>Seconds (0-59):</label>
+    <input type="number" min="0" max="59" name="seconds" placeholder="seconds" required="required" /><br>
+
+    <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+  </form>
+  <br>
+  {{ prediction_text }}
+  <br>
+  <br>
+  <img src="data:image/png;base64,{{url_3}}" alt="Traffic Volume Graph 1" onerror="this.style.display='none'"/>
+  <img src="data:image/png;base64,{{url_1}}" alt="Traffic Volume Graph 2" onerror="this.style.display='none'"/>
+  <img src="data:image/png;base64,{{url_4}}" alt="Traffic Volume Graph 3" onerror="this.style.display='none'"/>
+  <br>
+  <br>
+  <img src="data:image/png;base64,{{url_2}}" alt="Overall Traffic Trend" onerror="this.style.display='none'"/>
+</div>
+</body>
+</html>
