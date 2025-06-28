@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='images/Car.jpg') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pd {
+      padding-bottom: 45%;
+    }
+  </style>
+</head>
+<body>
+
+  <br>
+  <center>
+    <b class="pd">
+      <span style="color: black; font-size: 60px; font-family: 'Comic Sans MS', cursive, sans-serif;">
+        Traffic volume estimation
+      </span>
+    </b>
+  </center>
+  <br><br>
+
+  <div>
+    <br>
+    <center>
+      <p><span style="color: black;">{{ result }}</span></p>  
+    </center>
+  </div>
+
+</body>
+</html>
